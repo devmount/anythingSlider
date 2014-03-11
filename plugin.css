@@ -1,0 +1,16 @@
+/*
+	anythingSlider Plugin CSS styles
+*/
+
+.anythingSlider {
+}
+
+.anythingSlider, .anythingWindow, .anythingWindow div, .anythingWindow div div, .panel, .activePage, .cloned {
+	-moz-box-sizing: content-box !important;
+	-webkit-box-sizing: content-box !important;
+	box-sizing: content-box !important;
+}
+
+.anythingWindow div {
+	border: none;
+}

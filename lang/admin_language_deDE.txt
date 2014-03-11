@@ -1,0 +1,6 @@
+placeholder				= Gibt den anythingSlider zurück.
+description				= Generiert eine mit beliebigem Inhalt gefüllte Slideshow. <br /><br /><span style='font-weight:bold'>Nutzung:</span><br /><span style='font-family:monospace;margin:3px 3px; background-color:#eee;border:1px dotted #aaa;'>{anythingSlider|id|config|content}</span> Fügt die Slideshow ein.<br /><span style='font-style:italic'>1. Parameter:</span> Ein eindeutiger Name für den Slider (wichtig, sobald mehrere Slider auf einer Inhaltsseite oder im Template eingebunden sind).<br /><span style='font-style:italic'>2. Parameter:</span> Die Slider-Konfiguration. (Dokumentation auf github: https://github.com/CSS-Tricks/AnythingSlider/wiki/Setup#wiki-options)<br /><span style='font-style:italic'>3. Parameter:</span> Der Inhalt des Sliders. Einzelne Slides werden durch | getrennt. Es können beliebige Inhaltselement benutzt werden.<br /><br /><span style='font-weight:bold'>Dokumentation:</span><br />Eine ausführliche Dokumentation ist auf <span style="font-style:italic">www.devmount.de</span> zu finden (siehe obenstehender Link).
+config_width			= Feste Breite in px
+config_width_error 		= Bitte eine Zahl eingeben!
+config_height			= Feste Höhe in px
+config_height_error 	= Bitte eine Zahl eingeben!
