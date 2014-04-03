@@ -50,7 +50,7 @@ class anythingSlider extends Plugin
     const PLUGIN_VERSION = 'v1.0.2013-11-01';
     const MOZILO_VERSION = '2.0';
     private $_plugin_tags = array(
-        'tag1' => '{anythingSlider|id|config|content}',
+        'tag1' => '{anythingSlider|<id>|<config>|<content>}',
     );
 
     const LOGO_URL = 'http://media.devmount.de/logo_pluginconf.png';
@@ -349,24 +349,24 @@ class anythingSlider extends Plugin
         </li>
         <li class="mo-in-ul-li ui-widget-content anythingslider-admin-li">
             <div class="anythingslider-admin-subheader">'
-            . $this->_admin_lang->getLanguageValue('admin_test')
+            . $this->_admin_lang->getLanguageValue('admin_size')
             . '</div>
             <div style="margin-bottom:5px;">
                 <div class="anythingslider-single-conf">
                     {width_text}
+                    {width_description}
                 </div>
-                {width_description}
                 <span class="anythingslider-admin-default">
-                    [' . $this->_confdefault['width'][0] .']
+                    <!--[' . $this->_confdefault['width'][0] . ']-->
                 </span>
             </div>
             <div style="margin-bottom:5px;">
                 <div class="anythingslider-single-conf">
                     {height_text}
+                    {height_description}
                 </div>
-                {height_description}
                 <span class="anythingslider-admin-default">
-                    [' . $this->_confdefault['height'][0] .']
+                    <!--[' . $this->_confdefault['height'][0] . ']-->
                 </span>
         ';
 
