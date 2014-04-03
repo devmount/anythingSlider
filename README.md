@@ -19,7 +19,7 @@ Installing a plugin manually requires FTP Access.
 ```{anythingSlider|<id>|<config>|<content>}```
 Inserts the anythingSlider.
 
-1. Parameter ```<id>```: A unique name für the slider (important for multiple sliders on one page.
+1. Parameter ```<id>```: A unique name für the slider (important for multiple sliders on one page or in the template).
 2. Parameter ```<config>```: Slider Configuration. Officially there are at least 59 single configuration options. A detailed documentation can be found on the developers page: https://github.com/CSS-Tricks/AnythingSlider/wiki/Setup#wiki-options
 3. Parameter ```<content>```: Content of the slider. The single slides are separated by ```|```. Any content elements are possible.
 
