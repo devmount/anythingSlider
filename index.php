@@ -36,19 +36,74 @@ if (!defined('IS_CMS')) {
  * @license  GPL v3
  * @link     https://github.com/devmount/anythingSlider
  */
-class anythingSlider extends Plugin {
+class anythingSlider extends Plugin
+{
+    // language
+    private $_admin_lang;
+    private $_cms_lang;
 
-	public $admin_lang;
-	private $cms_lang;
+    // plugin information
+    const PLUGIN_AUTHOR  = 'HPdesigner';
+    const PLUGIN_DOCU
+        = 'http://devmount.de/Develop/Mozilo%20Plugins/anythingSlider.html';
+    const PLUGIN_TITLE   = 'anythingSlider';
+    const PLUGIN_VERSION = 'v1.0.2013-11-01';
+    const MOZILO_VERSION = '2.0';
+    private $_plugin_tags = array(
+        'tag1' => '{anythingSlider|id|config|content}',
+    );
 
-	function getContent($value) {
+    const LOGO_URL = 'http://media.devmount.de/logo_pluginconf.png';
 
+    /**
+     * set configuration elements, their default values and their configuration
+     * parameters
+     *
+     * @var array $_confdefault
+     *      text     => default, type, maxlength, size, regex
+     *      textarea => default, type, cols, rows, regex
+     *      password => default, type, maxlength, size, regex, saveasmd5
+     *      check    => default, type
+     *      radio    => default, type, descriptions
+     *      select   => default, type, descriptions, multiselect
+     */
+    private $_confdefault = array(
+        'width' => array(
+            '',
+            'text',
+            '',
+            '5',
+            "/^[0-9]{0,1000}$/",
+        ),
+        'height' => array(
+            '',
+            'text',
+            '',
+            '5',
+            "/^[0-9]{0,1000}$/",
+        ),
+    );
+
+    /**
+     * creates plugin content
+     *
+     * @param string $value Parameter divided by '|'
+     *
+     * @return string HTML output
+     */
+    function getContent($value)
+    {
 		global $CMS_CONF;
 		global $syntax;
 
-		$this->cms_lang = new Language(PLUGIN_DIR_REL . 'anythingSlider/lang/cms_language_' . $CMS_CONF->get('cmslanguage') . '.txt');
+        $this->_cms_lang = new Language(
+            $this->PLUGIN_SELF_DIR
+            . 'lang/cms_language_'
+            . $CMS_CONF->get('cmslanguage')
+            . '.txt'
+        );
 
-		$path = URL_BASE . PLUGIN_DIR_NAME . '/anythingSlider/core/';
+		$path = $this->PLUGIN_SELF_URL . 'core/';
 
 		// get params
 		$values = explode('|', $value);
