@@ -3,7 +3,7 @@ anythingSlider
 
 A Plugin for moziloCMS 2.0
 
-This plugin draft can be used for easier moziloCMS plugin development.
+Generates a slideshow filled with various content like text, images, html and moziloCMS syntax.
 
 ## Installation
 #### With moziloCMS installer
@@ -16,11 +16,12 @@ Installing a plugin manually requires FTP Access.
 - Go to the backend tab *Plugins* and activate the now listed new anythingSlider plugin
 
 ## Syntax
-```{anythingSlider|<param1>|<param2>}```
-Here comes the general description of the plugin tag.
+```{anythingSlider|<id>|<config>|<content>}```
+Inserts the anythingSlider.
 
-1. Parameter ```<param1>```: Short description of parameter 1.
-2. Parameter ```<param2>```: Short description of parameter 2.
+1. Parameter ```<id>```: A unique name für the slider (important for multiple sliders on one page.
+2. Parameter ```<config>```: Slider Configuration. Officially there are at least 59 single configuration options. A detailed documentation can be found on the developers page: https://github.com/CSS-Tricks/AnythingSlider/wiki/Setup#wiki-options
+3. Parameter ```<content>```: Content of the slider. The single slides are separated by ```|```. Any content elements are possible.
 
 ## License
 This Plugin is distributed under *GNU General Public License, Version 3* (see LICENSE).
