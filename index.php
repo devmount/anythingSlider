@@ -108,45 +108,100 @@ class anythingSlider extends Plugin
 
         // get params
         $values = explode('|', $value);
-        $param_id       = rawurlencode(trim($values[0]));                   // id for current anythingslider
-        $param_id       = str_replace(' ','',rawurldecode($param_id));
-        $param_config   = trim(str_replace('-html_br~', ' ', $values[1]));  // slider configuration
-        $param_content  = array_slice($values, 2);                          // slider content
+
+        // id for current anythingslider
+        $param_id = rawurlencode(trim($values[0]));
+        $param_id = str_replace(' ','',rawurldecode($param_id));
+        // slider configuration
+        $param_config = trim(str_replace('-html_br~', ' ', $values[1]));
+        // slider content = rest array = single slides
+        $param_content = array_slice($values, 2);
 
         // get theme
         $theme = '';
         $all_configs = explode(',',$param_config);
-        foreach($all_configs as $single_config) {
+        foreach ($all_configs as $single_config) {
             $sconfig = explode(':',$single_config);
-            if(trim($sconfig[0]) == 'theme') $theme = str_replace('"','',trim($sconfig[1]));
+            if (trim($sconfig[0]) == 'theme') {
+                $theme = str_replace('"','',trim($sconfig[1]));
+            }
         }
 
-        // get conf
-        $conf = array(
-            'width'     => $this->settings->get('width'),
-            'height'    => $this->settings->get('height'),
-        );
+        // get conf and set default
+        $conf = array();
+        foreach ($this->_confdefault as $elem => $default) {
+            $conf[$elem] = ($this->settings->get($elem) == '')
+                ? $default[0]
+                : $this->settings->get($elem);
+        }
+
+        // build styles
         $set_styles = ($conf['width'] != '' or $conf['height'] != '');
-        $width_style = ($conf['width'] != '') ? 'width: ' . $conf['width'] . 'px;' : '';
-        $height_style = ($conf['height'] != '') ? 'height: ' . $conf['height'] . 'px;' : '';
+        $width_style = ($conf['width'] != '')
+            ? 'width: ' . $conf['width'] . 'px;'
+            : '';
+        $height_style = ($conf['height'] != '')
+            ? 'height: ' . $conf['height'] . 'px;'
+            : '';
 
         // jQuery (required)
         $syntax->insert_jquery_in_head('jquery');
 
         // Optional plugins
-        $syntax->insert_in_head('<script type="text/javascript" src="' . $path . 'js/jquery.easing.1.2.js"></script>');
-        $syntax->insert_in_head('<script type="text/javascript" src="' . $path . 'js/swfobject.js"></script>');
+        $syntax->insert_in_head(
+            '<script
+                type="text/javascript"
+                src="'. $path . 'js/jquery.easing.1.2.js"
+            ></script>'
+        );
+        $syntax->insert_in_head(
+            '<script
+                type="text/javascript"
+                src="'. $path . 'js/swfobject.js"
+            ></script>'
+        );
         // Anything Slider
-        $syntax->insert_in_head('<link rel="stylesheet" href="' . $path . 'css/anythingslider.css" type="text/css" media="screen" />');
-        $syntax->insert_in_head('<script type="text/javascript" src="' . $path . 'js/jquery.anythingslider.min.js"></script>');
+        $syntax->insert_in_head(
+            '<link
+                rel="stylesheet"
+                href="'. $path . 'css/anythingslider.css"
+                type="text/css"
+                media="screen"
+            />'
+        );
+        $syntax->insert_in_head(
+            '<script
+                type="text/javascript"
+                src="'. $path . 'js/jquery.anythingslider.min.js"
+            ></script>'
+        );
         // used stylesheet
-        $syntax->insert_in_head('<link rel="stylesheet" href="' . $path . 'css/theme-'.$theme.'.css" type="text/css" media="screen" />');
+        $syntax->insert_in_head(
+            '<link
+                rel="stylesheet"
+                href="'. $path . 'css/theme-' . $theme . '.css"
+                type="text/css"
+                media="screen"
+            />'
+        );
         // AnythingSlider optional extensions
-        $syntax->insert_in_head('<script type="text/javascript" src="' . $path . 'js/jquery.anythingslider.fx.min.js"></script>');
-        $syntax->insert_in_head('<script type="text/javascript" src="' . $path . 'js/jquery.anythingslider.video.min.js"></script>');
+        $syntax->insert_in_head(
+            '<script
+                type="text/javascript"
+                src="'. $path . 'js/jquery.anythingslider.fx.min.js"
+            ></script>'
+        );
+        $syntax->insert_in_head(
+            '<script
+                type="text/javascript"
+                src="'. $path . 'js/jquery.anythingslider.video.min.js"
+            ></script>'
+        );
 
         // Initializing Slider with configuration
-        if ($param_config != '') $param_config = '{' . $param_config . '}';
+        if ($param_config != '') {
+            $param_config = '{' . $param_config . '}';
+        }
         $syntax->insert_in_head('
             <script type="text/javascript">
                 $(function(){
@@ -164,10 +219,17 @@ class anythingSlider extends Plugin
             </style>
         ');
 
-        // build return content
-        $content = '<div id="' . $param_id . '">';
-        foreach ($param_content as $item) $content .= '<div>'.trim($item).'</div>';
+        // initialize return content, begin plugin content
+        $content = '<!-- BEGIN ' . self::PLUGIN_TITLE . ' plugin content --> ';
+
+        $content .= '<div id="' . $param_id . '">';
+        foreach ($param_content as $item) {
+            $content .= '<div>' . trim($item) . '</div>';
+        }
         $content .= '</div>';
+
+        // end plugin content
+        $content .= '<!-- END ' . self::PLUGIN_TITLE . ' plugin content --> ';
 
         return $content;
     }
