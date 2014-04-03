@@ -235,56 +235,250 @@ class anythingSlider extends Plugin
     }
 
 
-    function getConfig() {
+    /**
+     * sets backend configuration elements and template
+     *
+     * @return Array configuration
+     */
+    function getConfig()
+    {
         $config = array();
 
-        // fixed width of slider
-        $config['width']  = array(
-            'type' => 'text',
-            'description' => $this->admin_lang->getLanguageValue('config_width'),
-            'maxlength' => '100',
-            'size' => '5',
-            'regex' => "/^[0-9]{0,1000}$/",
-            'regex_error' => $this->admin_lang->getLanguageValue('config_width_error')
-        );
+        // read configuration values
+        foreach ($this->_confdefault as $key => $value) {
+            // handle each form type
+            switch ($value[1]) {
+            case 'text':
+                $config[$key] = $this->confText(
+                    $this->_admin_lang->getLanguageValue('config_' . $key),
+                    $value[2],
+                    $value[3],
+                    $value[4],
+                    $this->_admin_lang->getLanguageValue(
+                        'config_' . $key . '_error'
+                    )
+                );
+                break;
 
-        // fixed height of slider
-        $config['height']  = array(
-            'type' => 'text',
-            'description' => $this->admin_lang->getLanguageValue('config_height'),
-            'maxlength' => '100',
-            'size' => '5',
-            'regex' => "/^[0-9]{0,1000}$/",
-            'regex_error' => $this->admin_lang->getLanguageValue('config_height_error')
-        );
+            case 'textarea':
+                $config[$key] = $this->confTextarea(
+                    $this->_admin_lang->getLanguageValue('config_' . $key),
+                    $value[2],
+                    $value[3],
+                    $value[4],
+                    $this->_admin_lang->getLanguageValue(
+                        'config_' . $key . '_error'
+                    )
+                );
+                break;
+
+            case 'password':
+                $config[$key] = $this->confPassword(
+                    $this->_admin_lang->getLanguageValue('config_' . $key),
+                    $value[2],
+                    $value[3],
+                    $value[4],
+                    $this->_admin_lang->getLanguageValue(
+                        'config_' . $key . '_error'
+                    ),
+                    $value[5]
+                );
+                break;
+
+            case 'check':
+                $config[$key] = $this->confCheck(
+                    $this->_admin_lang->getLanguageValue('config_' . $key)
+                );
+                break;
+
+            case 'radio':
+                $descriptions = array();
+                foreach ($value[2] as $label) {
+                    $descriptions[$label] = $this->_admin_lang->getLanguageValue(
+                        'config_' . $key . '_' . $label
+                    );
+                }
+                $config[$key] = $this->confRadio(
+                    $this->_admin_lang->getLanguageValue('config_' . $key),
+                    $descriptions
+                );
+                break;
+
+            case 'select':
+                $descriptions = array();
+                foreach ($value[2] as $label) {
+                    $descriptions[$label] = $this->_admin_lang->getLanguageValue(
+                        'config_' . $key . '_' . $label
+                    );
+                }
+                $config[$key] = $this->confSelect(
+                    $this->_admin_lang->getLanguageValue('config_' . $key),
+                    $descriptions,
+                    $value[3]
+                );
+                break;
+
+            default:
+                break;
+            }
+        }
+
+        // read admin.css
+        $admin_css = '';
+        $lines = file('../plugins/' . self::PLUGIN_TITLE. '/admin.css');
+        foreach ($lines as $line_num => $line) {
+            $admin_css .= trim($line);
+        }
+
+        // add template CSS
+        $template = '<style>' . $admin_css . '</style>';
+
+        // build Template
+        $template .= '
+            <div class="anythingslider-admin-header">
+            <span>'
+                . $this->_admin_lang->getLanguageValue(
+                    'admin_header',
+                    self::PLUGIN_TITLE
+                )
+            . '</span>
+            <a href="' . self::PLUGIN_DOCU . '" target="_blank">
+            <img style="float:right;" src="' . self::LOGO_URL . '" />
+            </a>
+            </div>
+        </li>
+        <li class="mo-in-ul-li ui-widget-content anythingslider-admin-li">
+            <div class="anythingslider-admin-subheader">'
+            . $this->_admin_lang->getLanguageValue('admin_test')
+            . '</div>
+            <div style="margin-bottom:5px;">
+                <div class="anythingslider-single-conf">
+                    {width_text}
+                </div>
+                {width_description}
+                <span class="anythingslider-admin-default">
+                    [' . $this->_confdefault['width'][0] .']
+                </span>
+            </div>
+            <div style="margin-bottom:5px;">
+                <div class="anythingslider-single-conf">
+                    {height_text}
+                </div>
+                {height_description}
+                <span class="anythingslider-admin-default">
+                    [' . $this->_confdefault['height'][0] .']
+                </span>
+        ';
+
+        $config['--template~~'] = $template;
 
         return $config;
     }
 
+    /**
+     * sets default backend configuration elements, if no plugin.conf.php is
+     * created yet
+     *
+     * @return Array configuration
+     */
+    function getDefaultSettings()
+    {
+        $config = array('active' => 'true');
+        foreach ($this->_confdefault as $elem => $default) {
+            $config[$elem] = $default[0];
+        }
+        return $config;
+    }
 
-    function getInfo() {
+    /**
+     * sets backend plugin information
+     *
+     * @return Array information
+     */
+    function getInfo()
+    {
         global $ADMIN_CONF;
 
-        $this->admin_lang = new Language(PLUGIN_DIR_REL."anythingSlider/lang/admin_language_".$ADMIN_CONF->get("language").".txt");
+        $this->_admin_lang = new Language(
+            $this->PLUGIN_SELF_DIR
+            . 'lang/admin_language_'
+            . $ADMIN_CONF->get('language')
+            . '.txt'
+        );
+
+        // build plugin tags
+        $tags = array();
+        foreach ($this->_plugin_tags as $key => $tag) {
+            $tags[$tag] = $this->_admin_lang->getLanguageValue('tag_' . $key);
+        }
 
         $info = array(
-            // Plugin-Name + Version
-            '<b>anythingSlider</b> v1.0.2013-11-01',
-            // moziloCMS-Version
-            '2.0',
-            // Kurzbeschreibung nur <span> und <br /> sind erlaubt
-            $this->admin_lang->getLanguageValue('description'),
-            // Name des Autors
-            'HPdesigner',
-            // Docu-URL
-            'http://www.devmount.de/Develop/Mozilo%20Plugins/anythingSlider.html',
-            // Platzhalter für die Selectbox in der Editieransicht
-            // - ist das Array leer, erscheint das Plugin nicht in der Selectbox
-            array(
-                '{anythingSlider|id|config|content}' => $this->admin_lang->getLanguageValue('placeholder')
-            )
+            '<b>' . self::PLUGIN_TITLE . '</b> ' . self::PLUGIN_VERSION,
+            self::MOZILO_VERSION,
+            $this->_admin_lang->getLanguageValue(
+                'description',
+                htmlspecialchars($this->_plugin_tags['tag1'])
+            ),
+            self::PLUGIN_AUTHOR,
+            self::PLUGIN_DOCU,
+            $tags
         );
+
         return $info;
+    }
+
+    /**
+     * creates configuration for text fields
+     *
+     * @param string $description Label
+     * @param string $maxlength   Maximum number of characters
+     * @param string $size        Size
+     * @param string $regex       Regular expression for allowed input
+     * @param string $regex_error Wrong input error message
+     *
+     * @return Array  Configuration
+     */
+    protected function confText(
+        $description,
+        $maxlength = '',
+        $size = '',
+        $regex = '',
+        $regex_error = ''
+    ) {
+        // required properties
+        $conftext = array(
+            'type' => 'text',
+            'description' => $description,
+        );
+        // optional properties
+        if ($maxlength != '') {
+            $conftext['maxlength'] = $maxlength;
+        }
+        if ($size != '') {
+            $conftext['size'] = $size;
+        }
+        if ($regex != '') {
+            $conftext['regex'] = $regex;
+        }
+        if ($regex_error != '') {
+            $conftext['regex_error'] = $regex_error;
+        }
+        return $conftext;
+    }
+
+    /**
+     * throws styled error message
+     *
+     * @param string $text Content of error message
+     *
+     * @return string HTML content
+     */
+    protected function throwError($text)
+    {
+        return '<div class="' . self::PLUGIN_TITLE . 'Error">'
+            . '<div>' . $this->_cms_lang->getLanguageValue('error') . '</div>'
+            . '<span>' . $text. '</span>'
+            . '</div>';
     }
 }
 
