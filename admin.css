@@ -30,3 +30,19 @@
     display: inline-block;
     margin-right: 5px;
 }
+
+.anythingslider-bold {
+    font-weight: bold;
+}
+.anythingslider-code {
+    font-family: monospace;
+    margin: 3px 3px;
+    background-color: #eee;
+    border: 1px dotted #aaa;
+}
+.anythingslider-italic {
+    font-style: italic;
+}
+.anythingslider-pre {
+    font-family: monospace;
+}
