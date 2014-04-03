@@ -1,36 +1,59 @@
-<?php if(!defined('IS_CMS')) die();
+<?php
 
 /**
- * Plugin:   anythingSlider
- * @author:  HPdesigner (hpdesigner[at]web[dot]de)
- * @version: v1.0.2013-11-01
- * @license: GPL
- * @see:     What good is it for a man to gain the whole world, yet forfeit his soul?
- *           - The Bible
+ * moziloCMS Plugin: anythingSlider
+ *
+ * Does something awesome!
+ *
+ * PHP version 5
+ *
+ * @category PHP
+ * @package  PHP_MoziloPlugins
+ * @author   HPdesigner <mail@devmount.de>
+ * @license  GPL v3
+ * @version  GIT: v1.0.2013-11-01
+ * @link     https://github.com/devmount/anythingSlider
+ * @link     http://devmount.de/Develop/Mozilo%20Plugins/anythingSlider.html
+ * @see      What good is it for a man to gain the whole world, yet forfeit his soul?
+ *           – The Bible
  *
  * Plugin created by DEVMOUNT
  * www.devmount.de
  *
-**/
+ */
 
+// only allow moziloCMS environment
+if (!defined('IS_CMS')) {
+    die();
+}
+
+/**
+ * anythingSlider Class
+ *
+ * @category PHP
+ * @package  PHP_MoziloPlugins
+ * @author   HPdesigner <mail@devmount.de>
+ * @license  GPL v3
+ * @link     https://github.com/devmount/anythingSlider
+ */
 class anythingSlider extends Plugin {
-	
+
 	public $admin_lang;
 	private $cms_lang;
-	
+
 	function getContent($value) {
 
 		global $CMS_CONF;
 		global $syntax;
 
 		$this->cms_lang = new Language(PLUGIN_DIR_REL . 'anythingSlider/lang/cms_language_' . $CMS_CONF->get('cmslanguage') . '.txt');
-		
+
 		$path = URL_BASE . PLUGIN_DIR_NAME . '/anythingSlider/core/';
 
 		// get params
 		$values = explode('|', $value);
 		$param_id  		= rawurlencode(trim($values[0])); 					// id for current anythingslider
-		$param_id  		= str_replace(' ','',rawurldecode($param_id)); 
+		$param_id  		= str_replace(' ','',rawurldecode($param_id));
 		$param_config	= trim(str_replace('-html_br~', ' ', $values[1])); 	// slider configuration
 		$param_content	= array_slice($values, 2); 							// slider content
 
@@ -65,7 +88,7 @@ class anythingSlider extends Plugin {
 		// AnythingSlider optional extensions
 		$syntax->insert_in_head('<script type="text/javascript" src="' . $path . 'js/jquery.anythingslider.fx.min.js"></script>');
 		$syntax->insert_in_head('<script type="text/javascript" src="' . $path . 'js/jquery.anythingslider.video.min.js"></script>');
-		
+
 		// Initializing Slider with configuration
 		if ($param_config != '') $param_config = '{' . $param_config . '}';
 		$syntax->insert_in_head('
@@ -89,7 +112,7 @@ class anythingSlider extends Plugin {
 		$content = '<div id="' . $param_id . '">';
 		foreach ($param_content as $item) $content .= '<div>'.trim($item).'</div>';
 		$content .= '</div>';
-		
+
 		return $content;
 	}
 
@@ -125,26 +148,26 @@ class anythingSlider extends Plugin {
 		global $ADMIN_CONF;
 
 		$this->admin_lang = new Language(PLUGIN_DIR_REL."anythingSlider/lang/admin_language_".$ADMIN_CONF->get("language").".txt");
-				
+
 		$info = array(
 			// Plugin-Name + Version
 			'<b>anythingSlider</b> v1.0.2013-11-01',
 			// moziloCMS-Version
 			'2.0',
 			// Kurzbeschreibung nur <span> und <br /> sind erlaubt
-			$this->admin_lang->getLanguageValue('description'), 
+			$this->admin_lang->getLanguageValue('description'),
 			// Name des Autors
 			'HPdesigner',
 			// Docu-URL
 			'http://www.devmount.de/Develop/Mozilo%20Plugins/anythingSlider.html',
-			// Platzhalter für die Selectbox in der Editieransicht 
+			// Platzhalter für die Selectbox in der Editieransicht
 			// - ist das Array leer, erscheint das Plugin nicht in der Selectbox
 			array(
 				'{anythingSlider|id|config|content}' => $this->admin_lang->getLanguageValue('placeholder')
 			)
 		);
 		return $info;
-	} 
-} 
+	}
+}
 
 ?>
