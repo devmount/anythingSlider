@@ -11,7 +11,7 @@
  * @package  PHP_MoziloPlugins
  * @author   HPdesigner <mail@devmount.de>
  * @license  GPL v3
- * @version  GIT: v1.0.2013-11-01
+ * @version  GIT: v1.1.2014-04-04
  * @link     https://github.com/devmount/anythingSlider
  * @link     http://devmount.de/Develop/Mozilo%20Plugins/anythingSlider.html
  * @see      What good is it for a man to gain the whole world, yet forfeit his soul?
@@ -47,7 +47,7 @@ class anythingSlider extends Plugin
     const PLUGIN_DOCU
         = 'http://devmount.de/Develop/Mozilo%20Plugins/anythingSlider.html';
     const PLUGIN_TITLE   = 'anythingSlider';
-    const PLUGIN_VERSION = 'v1.0.2013-11-01';
+    const PLUGIN_VERSION = 'v1.1.2014-04-04';
     const MOZILO_VERSION = '2.0';
     private $_plugin_tags = array(
         'tag1' => '{anythingSlider|<id>|<config>|<content>}',
