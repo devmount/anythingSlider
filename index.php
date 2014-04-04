@@ -111,7 +111,7 @@ class anythingSlider extends Plugin
 
         // id for current anythingslider
         $param_id = rawurlencode(trim($values[0]));
-        $param_id = str_replace(' ','',rawurldecode($param_id));
+        $param_id = str_replace(' ', '', rawurldecode($param_id));
         // slider configuration
         $param_config = trim(str_replace('-html_br~', ' ', $values[1]));
         // slider content = rest array = single slides
@@ -119,11 +119,11 @@ class anythingSlider extends Plugin
 
         // get theme
         $theme = '';
-        $all_configs = explode(',',$param_config);
+        $all_configs = explode(',', $param_config);
         foreach ($all_configs as $single_config) {
-            $sconfig = explode(':',$single_config);
+            $sconfig = explode(':', $single_config);
             if (trim($sconfig[0]) == 'theme') {
-                $theme = str_replace('"','',trim($sconfig[1]));
+                $theme = str_replace('"', '', trim($sconfig[1]));
             }
         }
 
@@ -202,22 +202,21 @@ class anythingSlider extends Plugin
         if ($param_config != '') {
             $param_config = '{' . $param_config . '}';
         }
-        $syntax->insert_in_head('
-            <script type="text/javascript">
+        $syntax->insert_in_head(
+            '<script type="text/javascript">
                 $(function(){
                     $("#' . $param_id . '").anythingSlider(' . $param_config . ');
                 });
-            </script>
-        ');
+            </script>'
+        );
 
-        if ($set_styles) $syntax->insert_in_head('
-            <style type="text/css">
-                #' . $param_id . ' {' .
-                    $width_style .
-                    $height_style .
-                '}
-            </style>
-        ');
+        if ($set_styles) {
+            $syntax->insert_in_head(
+                '<style type="text/css">
+                    #' . $param_id . ' {' . $width_style . $height_style . '}
+                </style>'
+            );
+        }
 
         // initialize return content, begin plugin content
         $content = '<!-- BEGIN ' . self::PLUGIN_TITLE . ' plugin content --> ';
