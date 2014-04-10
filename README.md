@@ -24,8 +24,8 @@ Inserts the anythingSlider.
 3. Parameter ```<content>```: Content of the slider. The single slides are separated by ```|```. Any content elements are possible.
 
 ## License
-This Plugin is distributed under *GNU General Public License, Version 3* (see LICENSE).
+This Plugin is distributed under *GNU General Public License, Version 3* (see LICENSE) or, at your choice, any further version.
 
 ## Documentation
 A detailed documentation and demo can be found on DEVMOUNT's website:
-http://devmount.de/Develop/Mozilo%20Plugins/anythingSlider.html
+http://devmount.de/Develop/moziloCMS/Plugins/anythingSlider.html
