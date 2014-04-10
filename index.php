@@ -45,7 +45,7 @@ class anythingSlider extends Plugin
     // plugin information
     const PLUGIN_AUTHOR  = 'HPdesigner';
     const PLUGIN_DOCU
-        = 'http://devmount.de/Develop/Mozilo%20Plugins/anythingSlider.html';
+        = 'http://devmount.de/Develop/moziloCMS/Plugins/anythingSlider.html';
     const PLUGIN_TITLE   = 'anythingSlider';
     const PLUGIN_VERSION = 'v1.1.2014-04-04';
     const MOZILO_VERSION = '2.0';
