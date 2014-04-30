@@ -3,17 +3,17 @@
 /**
  * moziloCMS Plugin: anythingSlider
  *
- * Does something awesome!
+ * Generates a slideshow filled with various content.
  *
  * PHP version 5
  *
  * @category PHP
  * @package  PHP_MoziloPlugins
  * @author   HPdesigner <mail@devmount.de>
- * @license  GPL v3
+ * @license  GPL v3+
  * @version  GIT: v1.1.2014-04-04
  * @link     https://github.com/devmount/anythingSlider
- * @link     http://devmount.de/Develop/Mozilo%20Plugins/anythingSlider.html
+ * @link     http://devmount.de/Develop/moziloCMS/Plugins/anythingSlider.html
  * @see      What good is it for a man to gain the whole world, yet forfeit his soul?
  *           – The Bible
  *
@@ -33,7 +33,7 @@ if (!defined('IS_CMS')) {
  * @category PHP
  * @package  PHP_MoziloPlugins
  * @author   HPdesigner <mail@devmount.de>
- * @license  GPL v3
+ * @license  GPL v3+
  * @link     https://github.com/devmount/anythingSlider
  */
 class anythingSlider extends Plugin
