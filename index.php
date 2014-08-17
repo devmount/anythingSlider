@@ -10,7 +10,7 @@
  * @category PHP
  * @package  PHP_MoziloPlugins
  * @author   HPdesigner <mail@devmount.de>
- * @license  GPL v3+
+ * @license  GPL v3
  * @version  GIT: v1.1.2014-04-04
  * @link     https://github.com/devmount/anythingSlider
  * @link     http://devmount.de/Develop/moziloCMS/Plugins/anythingSlider.html
@@ -33,7 +33,7 @@ if (!defined('IS_CMS')) {
  * @category PHP
  * @package  PHP_MoziloPlugins
  * @author   HPdesigner <mail@devmount.de>
- * @license  GPL v3+
+ * @license  GPL v3
  * @link     https://github.com/devmount/anythingSlider
  */
 class anythingSlider extends Plugin
