@@ -1,5 +1,6 @@
 tag1                = Gibt den anythingSlider zurück.
 description         = Generiert eine mit beliebigem Inhalt gefüllte Slideshow. <br /><br /><span class='anythingslider-bold'>Nutzung:</span><br /><span class='anythingslider-code'>{PARAM1}</span> Fügt die Slideshow ein.<br /><br /><span class='anythingslider-pre'>&lt;id&gt;: </span> Ein eindeutiger Name für den Slider (wichtig, sobald mehrere Slider auf einer Inhaltsseite oder im Template eingebunden sind).<br /><span class='anythingslider-pre'>&lt;conf&gt;: </span> Die Slider-Konfiguration. (Dokumentation der Entwickler auf github: https://github.com/CSS-Tricks/AnythingSlider/wiki/Setup#wiki-options)<br /><span class='anythingslider-pre'>&lt;content&gt;: </span> Der Inhalt des Sliders. Einzelne Slides werden durch | getrennt. Es können beliebige Inhaltselement benutzt werden.<br /><br /><span class='anythingslider-bold'>Dokumentation:</span><br />Eine ausführliche Dokumentation ist auf <span class='anythingslider-italic'>www.devmount.de</span> zu finden (siehe obenstehender Link).
+on_devmount         = auf devmount.de
 config_width        = Feste Breite in px
 config_width_error  = Bitte eine Zahl eingeben!
 config_height       = Feste Höhe in px
