@@ -12,7 +12,7 @@
  * @author   DEVMOUNT <mail@devmount.de>
  * @license  GPL v3
  * @version  GIT: v1.1.2014-04-04
- * @link     https://github.com/devmount/anythingSlider
+ * @link     https://github.com/devmount-mozilo/anythingSlider
  * @link     http://devmount.de/Develop/moziloCMS/Plugins/anythingSlider.html
  * @see      What good is it for a man to gain the whole world, yet forfeit his soul?
  *           – The Bible
@@ -34,7 +34,7 @@ if (!defined('IS_CMS')) {
  * @package  PHP_MoziloPlugins
  * @author   DEVMOUNT <mail@devmount.de>
  * @license  GPL v3
- * @link     https://github.com/devmount/anythingSlider
+ * @link     https://github.com/devmount-mozilo/anythingSlider
  */
 class anythingSlider extends Plugin
 {
