@@ -16,7 +16,9 @@ Installing a plugin manually requires FTP Access.
 - Go to the backend tab *Plugins* and activate the now listed new anythingSlider plugin
 
 ## Syntax
-```{anythingSlider|<id>|<config>|<content>}```
+```
+{anythingSlider|<id>|<config>|<content>}
+```
 Inserts the anythingSlider.
 
 1. Parameter ```<id>```: A unique name für the slider (important for multiple sliders on one page or in the template).
@@ -28,4 +30,4 @@ This Plugin is distributed under *GNU General Public License, Version 3* (see LI
 
 ## Documentation
 A detailed documentation and demo can be found on DEVMOUNT's website:
-http://devmount.de/Develop/moziloCMS/Plugins/anythingSlider.html
+http://t.devmount.de/Develop/moziloCMS/Plugins/anythingSlider.html
